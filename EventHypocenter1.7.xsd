@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 (x64) (http://www.altova.com) by Ryan Clark (private) -->
+<xs:schema xmlns:aasg="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/hypocenter/1.7" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gmlsf="http://www.opengis.net/gmlsf" targetNamespace="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/hypocenter/1.7" elementFormDefault="qualified" version="01.07">
+	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
+	<xs:annotation>
+		<!-- This XSD document, including XML schema, indicates the content requested for hypocenter data obtained for the AASG geothermal data project.  Hypocenter data for geothermal data system is intended as a tool to identify seismically active areas that are often associated with hydrothermal activity, thus the content model does not include detailed information that would be important for seismological analysis; such information should be accessed by including related resource links.  As such, data should be restricted to records for known or suspected seismic events.  The EventURI for an identified hypocenter is the cross-referencing link (foreign key) used to associate the record, related fault(s), seismic networks, and other information for a particular event. -->
+		<!--This XSD document was created on 2012-01-29 by Celia Coleman, AZGS. -->
+		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
+			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
+			<gmlsf:GMLProfileSchema>
+http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gmlsf:GMLProfileSchema>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:element name="Hypocenter" type="aasg:HypocenterType" substitutionGroup="gml:_Feature"/>
+	<xs:complexType name="HypocenterType">
+		<xs:complexContent>
+			<xs:extension base="gml:AbstractFeatureType">
+				<xs:sequence>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="HypocenterURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="EventName" type="xs:string"/>
+					<xs:element name="EventURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Label" type="xs:string"/>
+					<xs:element name="CatalogSourceCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="SeisometerNetwork" type="xs:string" minOccurs="0"/>
+					<xs:element name="OriginDateTime" type="xs:string"/>
+					<xs:element name="County" type="xs:string"/>
+					<xs:element name="State" type="xs:string"/>
+					<xs:element name="LatDegree" type="xs:double"/>
+					<xs:element name="LongDegree" type="xs:double"/>
+					<xs:element name="SRS" type="xs:string"/>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string"/>
+					<xs:element name="Depth" type="xs:double"/>
+					<xs:element name="DepthReferencePoint" type="xs:string"/>
+					<xs:element name="GTEpicenterQuality" type="xs:string" minOccurs="0"/>
+					<xs:element name="GTQualitySupportData" type="xs:string" minOccurs="0"/>
+					<xs:element name="DepthUncertainty" type="xs:string" minOccurs="0"/>
+					<xs:element name="VerticalUnits" type="xs:string"/>
+					<xs:element name="DepthDeterminationMethod" type="xs:string" minOccurs="0"/>
+					<xs:element name="SamplingFeatureType" type="xs:string"/>
+					<xs:element name="Magnitude" type="xs:double"/>
+					<xs:element name="MagnitudeType" type="xs:string"/>
+					<xs:element name="StandardMagnitudeError" type="xs:string" minOccurs="0"/>
+					<xs:element name="EventType" type="xs:string"/>
+					<xs:element name="EventTypeTerm" type="xs:string" minOccurs="0"/>
+					<xs:element name="RelatedFault" type="xs:string" minOccurs="0"/>
+					<xs:element name="RelatedFaultURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Methodology" type="xs:string" minOccurs="0"/>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0"/>
+					<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+					<xs:element name="Source" type="xs:string"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

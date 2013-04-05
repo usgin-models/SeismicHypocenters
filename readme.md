@@ -1,0 +1,5 @@
+This repository contains document artifacts for an inforamtion exchange for seismic events. The artifacts include an Excel Workbook that defines and documents the content model, and an XML schema that implements the model.
+
+This spreadsheet indicates the content requested for features representing Earthquake hypocenter observations.  Design is focused on EQs hypocenters portrayed as points. Hypocenter data for geothermal data system is intended as a tool to identify seismically active areas that are often associated with hydrothermal activity, thus the content model does not include detailed information that would be important for seismological analysis; such information should be accessed by including related resource links.  As such, data should be restricted to records for known or suspected earthquakes.
+
+Services are currently deployed using the tagged 1.7 version.

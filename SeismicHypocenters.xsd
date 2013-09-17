@@ -4,8 +4,8 @@
 	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
-		<!-- This XSD document, including XML schema, indicates the content requested for hypocenter data obtained for the AASG geothermal data project.  Hypocenter data for geothermal data system is intended as a tool to identify seismically active areas that are often associated with hydrothermal activity, thus the content model does not include detailed information that would be important for seismological analysis; such information should be accessed by including related resource links.  As such, data should be restricted to records for known or suspected seismic events.  The EventURI for an identified hypocenter is the cross-referencing link (foreign key) used to associate the record, related fault(s), seismic networks, and other information for a particular event. -->
-		<!--This XSD document was created on 2012-01-29 by Celia Coleman, AZGS. -->
+		<!-- This XSD document, including XML schema, indicates the content requested for hypocenter data obtained for the AASG geothermal data project. Hypocenter data for geothermal data system is intended as a tool to identify seismically active areas that are often associated with hydrothermal activity, thus the content model does not include detailed information that would be important for seismological analysis; such information should be accessed by including related resource links. As such, data should be restricted to records for known or suspected seismic events. The EventURI for an identified hypocenter is the cross-referencing link (foreign key) used to associate the record, related fault(s), seismic networks, and other information for a particular event. -->
+		<!--Annotated version 1.7.1. This XSD document was created on 2012-01-29 by Celia Coleman, AZGS. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS.-->
 		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
 			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
 			<gmlsf:GMLProfileSchema>
@@ -17,58 +17,194 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 		<xs:complexContent>
 			<xs:extension base="gml:AbstractFeatureType">
 				<xs:sequence>
-					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Integer record count, added by ArcGIS servers during service deployment; not required but cannot be removed when deploying from ArcGIS feature class. Not user maintained, so this element appears in XML implementation but not in the Content Model Template.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="HypocenterURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier that specifies the feature represented: e.g. a geologic feature, aquifer or facility structure. Ideally, the identifier is an http URI that will dereference to a known, useful representation of the feature. This identifier will be used to cross reference the feature  to other information related to this feature. For hypocenter observation, data originator should provide hypocenter-specific identifiers; these may have additional prefix strings (e.g. http://resources.usgin.org/uri-gin/…) added to enable dereferencing of http URIs or to ensure global uniqueness.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="EventName" type="xs:string"/>
+					<xs:element name="EventName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Common or human-readable name by which the feature is known. Recommend using only web-safe characters (a-z A-Z 0-9 _-.) in the name. Be consistent in the naming convention used within any given dataset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="EventURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier that specifies the feature represented (seismic event hypocenter). Ideally, the identifier is an http URI that will dereference to a known, useful representation of the feature. This identifier will be used to cross reference the feature  to other information related to this feature.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="Label" type="xs:string"/>
-					<xs:element name="CatalogSourceCode" type="xs:string" minOccurs="0"/>
-					<xs:element name="SeisometerNetwork" type="xs:string" minOccurs="0"/>
-					<xs:element name="OriginDateTime" type="xs:string"/>
-					<xs:element name="County" type="xs:string"/>
-					<xs:element name="State" type="xs:string"/>
-					<xs:element name="LatDegree" type="xs:double"/>
-					<xs:element name="LongDegree" type="xs:double"/>
-					<xs:element name="SRS" type="xs:string"/>
-					<xs:element name="LocationUncertaintyStatement" type="xs:string"/>
-					<xs:element name="Depth" type="xs:double"/>
-					<xs:element name="DepthReferencePoint" type="xs:string"/>
-					<xs:element name="GTEpicenterQuality" type="xs:string" minOccurs="0"/>
-					<xs:element name="GTQualitySupportData" type="xs:string" minOccurs="0"/>
-					<xs:element name="DepthUncertainty" type="xs:string" minOccurs="0"/>
-					<xs:element name="VerticalUnits" type="xs:string"/>
-					<xs:element name="DepthDeterminationMethod" type="xs:string" minOccurs="0"/>
-					<xs:element name="SamplingFeatureType" type="xs:string"/>
-					<xs:element name="Magnitude" type="xs:double"/>
-					<xs:element name="MagnitudeType" type="xs:string"/>
-					<xs:element name="StandardMagnitudeError" type="xs:string" minOccurs="0"/>
-					<xs:element name="EventType" type="xs:string"/>
-					<xs:element name="EventTypeTerm" type="xs:string" minOccurs="0"/>
-					<xs:element name="RelatedFault" type="xs:string" minOccurs="0"/>
+					<xs:element name="Label" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Short text string for labeling the feature on maps. Can be the same as feature name. A label may be an OtherLocationName, OtherID or the Name or some combination.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CatalogSourceCode" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>See list of codes from http://www.ncedc.org/anss/anss-catalog-source-codes.html on the 'ANSS Source Code Tables' tab.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SeisometerNetwork" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Network of individual seismometers used to record and transmit data from tremors.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OriginDateTime" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Date for the record (date on which event occurred). Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). Six integers followed by the fraction of a second reported with an appropriate number of significant figures to convey the quality of the origin time. All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="County" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Required. County name. If unknown or not applicable use 'missing'. If offshore, specify 'offshore' in this field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="State" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Required. State name without abbreviations. If unknown or not applicable use 'missing'. For offshore locations, specify the governing or nearest state and list the county as 'offshore'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LatDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Latitude coordinate for the surface location of the feature (use center point for areas); values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LongDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Longitude coordinate for the surface location of the feature (use center point for areas); values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SRS" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The spatial reference system. It is recommended that an EPSG code be used to identify the SRS used to specify the location.  If an EPSG code is used, identify it as such with the prefix 'EPSG:' For common EPSG codes, see the Data Valid Terms tab. EPSG:4326 is the identifier for WGS84, and should be the text in this field. EPSG stands for European Petroleum Survey Group. EPSSG codes can be dereferenced by putting the code in this URL (replace 4326) http://spatialreference.org/ref/epsg/4326/.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Information on how the original location was determined, e.g.: 1:250,000 map, gps unit, Google Earth, PLSS Conversion, Spatial Datum Conversion, e.g., NAD27 to WGS84.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Depth" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Depth of the hypocenter location using an appropriate number of significant digits to convey the quality of the hypocenter. Focal Depth in kilometers below mean sea level.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthReferencePoint" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Identifier for elevation datum to which other elevations are referred. Default shall be sea level (MSL).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="GTEpicenterQuality" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>GT ("Ground Truth") epicentre quality (km) as claimed by contributor. For example, GT2 means that the submitted epicentre estimate has a 95% chance of lying within 2 km of the true epicentre. See also http://www.isc.ac.uk/gtevents/</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="GTQualitySupportData" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Availability of information in support of the claimed GT quality, e.g.:
+								* RMS of residuals and number of stations used
+								* Goodness of fit of synthetics to observed waveforms as a function of depth
+								* Quality of depth phases such as pP and sP.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthUncertainty" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Uncertainty associated with depth measurements/values.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="VerticalUnits" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Units used to report all elevation and depth information. Default is km for kilometers.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthDeterminationMethod" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Term that indicates origin of depth determination; one of: fixed, calculated, unknown. This field is used to indicate where a fixed depth is used in hypocenter location calculation. For events distant from any recording station the depth is commonly fixed in the hypocenter location calculation (typically 5 or 10 km). A clear indication where depth was fixed, not calculated, would be useful.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SamplingFeatureType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Feature type is generally a "Hypocenter".</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Magnitude" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Must be a numeric value.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MagnitudeType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>This is a string value, and may be preceded by a min or max indicator. mb, Ms, ML, mbmle, msmle, following ISC database.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="StandardMagnitudeError" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Standard error associated with the reported magnitude.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EventType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Event classification free text, according to classification scheme used by data provider.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EventTypeTerm" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Terms for decomposition of event types using facets of type/subtype, confidence, and intensity.  Encode in type field as {Type [ | Confidence][ | Intensity]}.  Examples  {earthquake | not specified | not specified}, {induced event | suspected},  {earthquake | not specified}.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RelatedFault" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of fault associated with seismic event, if known. This association does not denote that the earthquake occurred on a particular fault surface. It is meant to provide a means of locating events that may be related to a particular structure. Comment on confidence or basis of relation to a fault in the Notes field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="RelatedFaultURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Identifier for related fault. Ideally, the identifier is an http URI that will dereference to a known, useful representation of the fault.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="Methodology" type="xs:string" minOccurs="0"/>
-					<xs:element name="RelatedResource" type="xs:string" minOccurs="0"/>
-					<xs:element name="Notes" type="xs:string" minOccurs="0"/>
-					<xs:element name="Source" type="xs:string"/>
-					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:element name="Methodology" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A brief description of the methodology for hypocenter location, e.g.: Ground survey of known explosion location, with or without information on shot time; InSAR; Local seismographic network data; Analysis of network data that meet criteria of Bondár et al (BSSA, 2004); Special aftershock/main shock studies; Citation of a specific technical report or scientific paper. Data provider should indicate QA/QC performed on the data, including individual or institution, time frame and depth of quality check.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This may be one to many http links to resources (logs, pictures or other documents if available online. Should be an http:// address (URL)) related to the observation described in each record. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Notes" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Any additional information to be provided, including description and other data not captured by the template, details about method, contact information for related parties (original collector, project PI), etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Source" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Mandatory. Short text explanation of source of information defining feature; may be author-date type citation, but should include some indication of how digital data originated. If unpublished data, provide researcher name, date and research institution for proper citation. Separate multiple citations with pipe ('|') character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Shape" type="gml:PointPropertyType">
+						<xs:annotation>
+							<xs:documentation>Added by GIS for WFS service; this element appears in the xml output, but is generated during service deployment from the latitude and longitude, therefore it doesn't appear in the template.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>

@@ -5,7 +5,7 @@
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
 		<!-- This XSD document, including XML schema, indicates the content requested for hypocenter data obtained for the AASG geothermal data project. Hypocenter data for geothermal data system is intended as a tool to identify seismically active areas that are often associated with hydrothermal activity, thus the content model does not include detailed information that would be important for seismological analysis; such information should be accessed by including related resource links. As such, data should be restricted to records for known or suspected seismic events. The EventURI for an identified hypocenter is the cross-referencing link (foreign key) used to associate the record, related fault(s), seismic networks, and other information for a particular event. -->
-		<!--Annotated version 1.7.1. This XSD document was created on 2012-01-29 by Celia Coleman, AZGS. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS.-->
+		<!--Version 1.7.2 changed date type to 'dateTime'. Annotated version 1.7.1. This XSD document was created on 2012-01-29 by Celia Coleman, AZGS. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS.-->
 		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
 			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
 			<gmlsf:GMLProfileSchema>
@@ -62,7 +62,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 							<xs:documentation>Network of individual seismometers used to record and transmit data from tremors.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="OriginDateTime" type="xs:string">
+					<xs:element name="OriginDateTime" type="xs:dateTime">
 						<xs:annotation>
 							<xs:documentation>Date for the record (date on which event occurred). Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). Six integers followed by the fraction of a second reported with an appropriate number of significant figures to convey the quality of the origin time. All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
 						</xs:annotation>
